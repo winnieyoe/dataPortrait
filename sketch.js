@@ -4,7 +4,7 @@ let perDay;
 let allCount = [];
 let allLoaded = false;
 let numLoaded = 0;
-let totalImgs = 258;
+let totalImgs = 260;
 let imgsObj = {};
 let marginB = 20;
 let marginL = 45;
@@ -91,7 +91,18 @@ function setup() {
     row['hour'] = time.substring(0,2);
     row['image'] = table.getRow(i).get('FileName');
     if (row['image'].length > 0){
-      loadImage('images/' + row['image'] + '.png', function(img) {
+      //FOR LOCAL SERVER
+      // loadImage('images/' + row['image'] + '.PNG', function(img) {
+      //     imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
+      //     numLoaded++;
+      //     if (numLoaded == totalImgs){
+      //       allLoaded = true;
+      //       console.log(allLoaded);
+      //     }
+      // });
+
+      //FOR GITHUB
+      loadImage('https://raw.githubusercontent.com/winnieyoe/dataPortrait/images/' + row['image'] + '.PNG', function(img) {
           imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
           numLoaded++;
           if (numLoaded == totalImgs){
