@@ -4,7 +4,7 @@ let perDay;
 let allCount = [];
 let allLoaded = false;
 let numLoaded = 0;
-let totalImgs = 237;
+let totalImgs = 258;
 let imgsObj = {};
 let marginB = 20;
 let marginL = 45;
@@ -91,7 +91,7 @@ function setup() {
     row['hour'] = time.substring(0,2);
     row['image'] = table.getRow(i).get('FileName');
     if (row['image'].length > 0){
-      loadImage('images/' + row['image'] + '.PNG', function(img) {
+      loadImage('images/' + row['image'] + '.png', function(img) {
           imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
           numLoaded++;
           if (numLoaded == totalImgs){
@@ -232,7 +232,7 @@ function draw() {
         allCount[j][i].x2 = j*60+10*j + 60 + marginL;
         allCount[j][i].y1 = (23-i)*(height-marginB)/24; //height-10 so that there is space for date legend
         allCount[j][i].y2 = (23-i)*(height-marginB)/24 + 25;
-        rect(j*60+10*j+marginL, (23-i)*(height-marginB)/24, 60, 25); //reverse
+        rect(j*60+10*j+marginL, (23-i)*(height-marginB)/24, 60, 24); //reverse
       }
     }
 
