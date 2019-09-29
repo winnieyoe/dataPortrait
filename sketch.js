@@ -4,7 +4,7 @@ let perDay;
 let allCount = [];
 let allLoaded = false;
 let numLoaded = 0;
-let totalImgs = 199;
+let totalImgs = 237;
 let imgsObj = {};
 let marginB = 20;
 let marginL = 45;
@@ -45,7 +45,7 @@ function preload() {
 // }
 
 function setup() {
-  let cnv = createCanvas(945, 750);
+  let cnv = createCanvas(1600, 750);
   cnv.parent('mySketch');
   date = table.getColumn('Date');
   time = table.getColumn('Time');
@@ -246,7 +246,7 @@ function draw() {
           for (let k = 0; k < currentEle.images.length; k++){
               let currentImg =  imgsObj[ currentEle.images[k] ];
 
-              currentImg.resize(200, 0);
+              // currentImg.resize(200, 0);
               if (currentEle.y1 < height/2 && currentEle.x1 > width*2/3 && currentEle.x1 < width){
                 image(currentImg, (k+12)*60+10, currentEle.y1+10);
               } else if(currentEle.y1 > height/2 && currentEle.x1 > width*2/3 && currentEle.x1 < width){
