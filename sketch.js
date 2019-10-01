@@ -4,7 +4,7 @@ let perDay;
 let allCount = [];
 let allLoaded = false;
 let numLoaded = 0;
-let totalImgs = 260;
+let totalImgs = 311;
 let imgsObj = {};
 let marginB = 20;
 let marginL = 45;
@@ -45,7 +45,7 @@ function preload() {
 // }
 
 function setup() {
-  let cnv = createCanvas(1600, 750);
+  let cnv = createCanvas(1500, 750);
   cnv.parent('mySketch');
   date = table.getColumn('Date');
   time = table.getColumn('Time');
@@ -92,7 +92,7 @@ function setup() {
     row['image'] = table.getRow(i).get('FileName');
     if (row['image'].length > 0){
       //FOR LOCAL SERVER
-      // loadImage('images/' + row['image'] + '.PNG', function(img) {
+      // loadImage('smImages/' + row['image'] + '.PNG', function(img) {
       //     imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
       //     numLoaded++;
       //     if (numLoaded == totalImgs){
@@ -243,34 +243,59 @@ function draw() {
         allCount[j][i].x2 = j*60+10*j + 60 + marginL;
         allCount[j][i].y1 = (23-i)*(height-marginB)/24; //height-10 so that there is space for date legend
         allCount[j][i].y2 = (23-i)*(height-marginB)/24 + 25;
-        rect(j*60+10*j+marginL, (23-i)*(height-marginB)/24, 60, 24); //reverse
+        rect(j*60+10*j+marginL, (23-i)*(height-marginB)/24, 60, 25); //reverse
       }
     }
 
     // console.log(imgsObj);
     for (let j = 0; j < allCount.length; j++){
-      // console.log(allCount);
+      // console.log("allCount", allCount);
       for(let i = 0; i <24; i++){
         let currentEle = allCount[j][i];
         if (mouseX > currentEle.x1 && currentEle.x2 > mouseX && currentEle.y1 < mouseY && currentEle.y2 > mouseY){
-          // console.log(currentEle.images);
+          console.log("currentImage", currentEle.images);
+
+          let horzOffset = 60;
+          let totalWidthOfCurrentImages = 200 + ((currentEle.images.length-1) * horzOffset);
+          let blockWidth = 60;
+
+
           for (let k = 0; k < currentEle.images.length; k++){
               let currentImg =  imgsObj[ currentEle.images[k] ];
 
-              // currentImg.resize(200, 0);
-              if (currentEle.y1 < height/2 && currentEle.x1 > width*2/3 && currentEle.x1 < width){
-                image(currentImg, (k+12)*60+10, currentEle.y1+10);
-              } else if(currentEle.y1 > height/2 && currentEle.x1 > width*2/3 && currentEle.x1 < width){
-                image(currentImg, (k+12)*60+10, currentEle.y1-135);
-              } else if (currentEle.x1 < width*2/3 && currentEle.x1 > width/3 && currentEle.y1 < height/2){
-                image(currentImg, (k+6)*60+15, currentEle.y1+10);
-              } else if (currentEle.x1 < width*2/3 && currentEle.x1 > width/3 && currentEle.y1 > height/2){
-                image(currentImg, (k+6)*60+15, currentEle.y1-135);
-              } else if (currentEle.x1 < width/3 && currentEle.y1 < height/2){
-                image(currentImg, (k+1)*60+20, currentEle.y1+10);
-              } else {
-                image(currentImg, (k+1)*60+20, currentEle.y1-135);
+              let imgY;
+              let imgX;
+
+              if (currentEle.y1 < height/2){
+                  imgY = currentEle.y1+10;
               }
+              if (currentEle.y1 > height/2){
+                  imgY = currentEle.y1-135;
+              }
+              imgX = currentEle.x1 + 30;
+
+
+              if (currentEle.x1 + blockWidth + totalWidthOfCurrentImages > width){
+                imgX = currentEle.x1 - totalWidthOfCurrentImages;
+              }
+
+              imgX += horzOffset * k;
+              image(currentImg, imgX, imgY);
+
+              // currentImg.resize(200, 0);
+              // if (currentEle.y1 < height/2 && currentEle.x1 > width*2/3 && currentEle.x1 < width){
+              //   image(currentImg, (k+12)*60+10, currentEle.y1+10);
+              // } else if(currentEle.y1 > height/2 && currentEle.x1 > width*2/3 && currentEle.x1 < width){
+              //   image(currentImg, (k+12)*60+10, currentEle.y1-135);
+              // } else if (currentEle.x1 < width*2/3 && currentEle.x1 > width/3 && currentEle.y1 < height/2){
+              //   image(currentImg, (k+6)*60+15, currentEle.y1+10);
+              // } else if (currentEle.x1 < width*2/3 && currentEle.x1 > width/3 && currentEle.y1 > height/2){
+              //   image(currentImg, (k+6)*60+15, currentEle.y1-135);
+              // } else if (currentEle.x1 < width/3 && currentEle.y1 < height/2){
+              //   image(currentImg, (k+1)*60+20, currentEle.y1+10);
+              // } else {
+              //   image(currentImg, (k+1)*60+20, currentEle.y1-135);
+              // }
           }
           // imgsObj[ currentEle.images[0] ]
         }
