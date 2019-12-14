@@ -29,6 +29,11 @@ p {
   color: #EBEBEB;
 }
 
+#project-info{
+  position: -webkit-sticky;
+  position: sticky;
+}
+
 #info {
   margin-top: 0%;
   margin-bottom: 4%;
