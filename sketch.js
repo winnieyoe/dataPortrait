@@ -34,7 +34,7 @@ function preload() {
 }
 
 function setup() {
-  let cnv = createCanvas(6000, 750);
+  let cnv = createCanvas(4000, 750);
   cnv.parent('mySketch');
   date = table.getColumn('Date');
   time = table.getColumn('Time');
