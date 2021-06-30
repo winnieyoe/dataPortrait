@@ -76,7 +76,7 @@ function setup() {
       // });
 
       //FOR GITHUB
-      loadImage('https://raw.githubusercontent.com/winnieyoe/dataPortrait/master/smImages/' + row['image'] + '.jpg', function(img) {
+      loadImage('https://raw.githubusercontent.com/winnieyoe/dataPortrait/revert/smImages/' + row['image'] + '.jpg', function(img) {
           imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
           numLoaded++;
           if (numLoaded == totalImgs){
