@@ -4,7 +4,7 @@ let perDay;
 let allCount = [];
 let allLoaded = false;
 let numLoaded = 1;
-let totalImgs = 1000;
+let totalImgs = 998;
 let imgsObj = {};
 let boxWidth = 27;
 let marginBtwBox = 7;
@@ -43,6 +43,7 @@ function setup() {
   directDiv = document.getElementById("direct");
   socialDiv = document.getElementById("social");
   forwardedDiv = document.getElementById("forward");
+  let loaderDiv = document.getElementById("loader");
 
   let object = {};
   // console.log(object);
@@ -60,13 +61,14 @@ function setup() {
     row['hour'] = time.substring(0,2);
     row['image'] = table.getRow(i).get('FileName');
     if (row['image'].length > 0){
-      //FOR LOCAL SERVER
-      // loadImage('smImages/' + row['image'] + '.PNG', function(img) {
+      //FOR LOCAL SERVER (changed to jpg)
+      // loadImage('smImages/' + row['image'] + '.jpg', function(img) {
       //     imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
       //     numLoaded++;
       //     // console.log(numLoaded)
       //     if (numLoaded == totalImgs){
       //       allLoaded = true;
+      //       loaderDiv.remove();
       //       console.log(allLoaded);
       //     }
       // }, () => {
@@ -74,12 +76,13 @@ function setup() {
       // });
 
       //FOR GITHUB
-      loadImage('https://raw.githubusercontent.com/winnieyoe/dataPortrait/revert/smImages/' + row['image'] + '.png', function(img) {
+      loadImage('https://raw.githubusercontent.com/winnieyoe/dataPortrait/master/smImages/' + row['image'] + '.png', function(img) {
           imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
           numLoaded++;
           if (numLoaded == totalImgs){
             allLoaded = true;
-            console.log(allLoaded);
+            loaderDiv.remove();
+            // console.log(allLoaded);
           }
       });
     }
