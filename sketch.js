@@ -61,27 +61,27 @@ function setup() {
     row['image'] = table.getRow(i).get('FileName');
     if (row['image'].length > 0){
       //FOR LOCAL SERVER
-      loadImage('smImages/' + row['image'] + '.PNG', function(img) {
-          imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
-          numLoaded++;
-          // console.log(numLoaded)
-          if (numLoaded == totalImgs){
-            allLoaded = true;
-            console.log(allLoaded);
-          }
-      }, () => {
-        console.log(`This is not loaded: ${row['image']}`)
-      });
-
-      //FOR GITHUB
-      // loadImage('https://raw.githubusercontent.com/winnieyoe/dataPortrait/master/smImages/' + row['image'] + '.png', function(img) {
+      // loadImage('smImages/' + row['image'] + '.PNG', function(img) {
       //     imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
       //     numLoaded++;
+      //     // console.log(numLoaded)
       //     if (numLoaded == totalImgs){
       //       allLoaded = true;
       //       console.log(allLoaded);
       //     }
+      // }, () => {
+      //   console.log(`This is not loaded: ${row['image']}`)
       // });
+
+      //FOR GITHUB
+      loadImage('https://raw.githubusercontent.com/winnieyoe/dataPortrait/revert/smImages/' + row['image'] + '.png', function(img) {
+          imgsObj[ row['image'] ] = img; //create new key and value in imgsObj
+          numLoaded++;
+          if (numLoaded == totalImgs){
+            allLoaded = true;
+            console.log(allLoaded);
+          }
+      });
     }
     object[day].push(row);
     typeArray.push(type);
