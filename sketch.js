@@ -4,7 +4,7 @@ let perDay;
 let allCount = [];
 let allLoaded = false;
 let numLoaded = 1;
-let totalImgs = 1033;
+let totalImgs = 1000;
 let imgsObj = {};
 let boxWidth = 27;
 let marginBtwBox = 7;
